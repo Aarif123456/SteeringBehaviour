@@ -10,8 +10,8 @@ namespace GameBrains.Motors.Simple
 
     public class SimpleManualController : MonoBehaviour
     {
-        public string sideAxis = "Left Stick X";
-        public string forwardAxis = "Left Stick Y";
+        public string sideAxis = "Horizontal";
+        public string forwardAxis = "Vertical";
 
         private SimpleMotor motor;
 
@@ -28,7 +28,7 @@ namespace GameBrains.Motors.Simple
             }
         }
 
-        // If this behaviour is enabled, Update is called once per frame.
+        // If this behavior is enabled, Update is called once per frame.
         public void Update()
         {
             if (motor == null || motor.isAiControlled)

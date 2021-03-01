@@ -60,9 +60,9 @@ namespace GameBrains.Motors.Complex
 
     public class ComplexManualController : MonoBehaviour
     {
-        public string sideAxis = "Left Stick X";
-        public string forwardAxis = "Left Stick Y";
-        public string jumpButton = "Button A";
+        private string sideAxis = "Horizontal";
+        private string forwardAxis = "Vertical";
+        private string jumpButton = "Jump";
 
         private ComplexMotor motor;
 
