@@ -59,44 +59,48 @@ namespace GameBrains.Steering
     public class SeekSteeringBehaviour : SteeringBehaviour
     {
         protected const float MAX_VELOCITY=1f;
-        protected override void DetermineDesiredDirection()
+        protected override Vector3 DetermineDesiredDirection()
         {
             if (motor != null && motor.isAiControlled)
             {
-                GetTargetPosition();
+                targetPosition = GetTargetPosition();
+                desiredMoveDirection = GetMoveDirection();
+                distanceToTarget = GetDistanceToTarget();
 
                 // if not there yet ...
                 if (distanceToTarget > satisfactionRadius)
                 {
-                    // Dividing by the length is cheaper than normalizing when we already have the length anyway
-                    desiredMoveDirection /= distanceToTarget;
-
                     // Multiply the normalized direction vector by the distance capped at 1.
-                    desiredMoveDirection *= Mathf.Min(MAX_VELOCITY, distanceToTarget);
-                }
-                else
-                {
-                    // we're there (close enough). Stop.
-                    desiredMoveDirection = Vector3.zero;
+                    desiredMoveDirection *= MAX_VELOCITY;
+                    return desiredMoveDirection;
                 }
             }
-            else
-            {
-                desiredMoveDirection = Vector3.zero;
-            }
+            desiredMoveDirection = Vector3.zero;
+            return desiredMoveDirection;
         }
 
-        protected virtual void GetTargetPosition(){
+        /* Get position of direction and store in inner class variable */
+        protected virtual Vector3 GetTargetPosition(){
             if (targetObject != null)
             {
                 targetPosition = targetObject.transform.position;
             }
+            return targetPosition;
+        }
+        /* Get vector to target and store in inner class variable */
+        protected virtual Vector3 GetMoveDirection(){
             // vector from current to target position.
             desiredMoveDirection = targetPosition - transform.position;
             desiredMoveDirection.y = 0;
-
-            // Get the length of the direction vector which is the distance to the target.
-            distanceToTarget = desiredMoveDirection.magnitude;
+            desiredMoveDirection.Normalize();
+            return desiredMoveDirection;
         }
+
+        protected virtual float GetDistanceToTarget(){
+            // Get the length of the direction vector which is the distance to the target.
+            distanceToTarget = (targetPosition - transform.position).magnitude;
+            return distanceToTarget;
+        }
+
     }
 }

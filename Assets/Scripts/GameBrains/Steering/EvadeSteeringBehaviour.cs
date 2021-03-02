@@ -6,12 +6,21 @@ namespace GameBrains.Steering
 {
     [AddComponentMenu("Scripts/Steering/Evade")]
 
-    public class EvadeSteeringBehaviour : PursuitSteeringBehaviour
+    public class EvadeSteeringBehaviour : FleeSteeringBehaviour
     {
-        protected override void DetermineDesiredDirection()
+        protected override Vector3 GetTargetPosition()
         {
-            base.DetermineDesiredDirection();
-            desiredMoveDirection *= -1;
+            targetPosition = base.GetTargetPosition();
+            desiredMoveDirection = GetMoveDirection();
+            distanceToTarget = GetDistanceToTarget();
+            if (targetObject != null )
+            {
+                /* predict time required to reach target position */
+                float prediction = distanceToTarget/MAX_VELOCITY;
+                var targetVelocity = targetObject.GetComponent<CharacterController>().velocity;
+                targetPosition += targetVelocity * prediction;
+            }
+            return targetPosition;
         }
     }
 }

@@ -87,7 +87,7 @@ namespace GameBrains.Steering
 			{
 				Debug.Log("No Motor");
 			}
-
+			motor.AddSteeringScript();
 			steeringBehaviour = motor.steeringBehaviour;
 			if (steeringBehaviour == null)
 			{

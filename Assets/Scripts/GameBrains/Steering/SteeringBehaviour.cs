@@ -110,9 +110,10 @@ namespace GameBrains.Steering
             motor.jumpDesired = false;
         }
 
-        protected virtual void DetermineDesiredDirection()
+        protected virtual Vector3 DetermineDesiredDirection()
         {
             desiredMoveDirection = Vector3.zero;
+            return desiredMoveDirection;
         }
 
     }

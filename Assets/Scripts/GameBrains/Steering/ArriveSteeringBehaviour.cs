@@ -9,14 +9,17 @@ namespace GameBrains.Steering
 
     public class ArriveSteeringBehaviour : SeekSteeringBehaviour
     {
-        public float slowingRadius = 5f;
+        public float slowingRadius = 3f;
 
-        protected override void DetermineDesiredDirection()
+        protected override Vector3 DetermineDesiredDirection()
         {
-            base.DetermineDesiredDirection();
+            desiredMoveDirection = base.DetermineDesiredDirection();
+            distanceToTarget = GetDistanceToTarget();
             if (distanceToTarget < slowingRadius) {
+                /* value will always be between 0 and 1 because the above if statement */
                 desiredMoveDirection *= distanceToTarget / slowingRadius;
             }
+            return desiredMoveDirection;
         }
     }
 }

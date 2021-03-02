@@ -9,17 +9,19 @@ namespace GameBrains.Steering
 
     public class PursuitSteeringBehaviour : ArriveSteeringBehaviour
     {
-        protected override void GetTargetPosition()
+        protected override Vector3 GetTargetPosition()
         {
-            base.GetTargetPosition();
+            targetPosition = base.GetTargetPosition();
+            desiredMoveDirection = GetMoveDirection();
+            distanceToTarget = GetDistanceToTarget();
             if (targetObject != null )
             {
-                /* predict T seconds ahead */
+                /* predict time required to reach target position */
                 float prediction = distanceToTarget/MAX_VELOCITY;
                 var targetVelocity = targetObject.GetComponent<CharacterController>().velocity;
-                var horizontalVelocity = new Vector3(targetVelocity.x, 0, targetVelocity.z);
-                targetPosition += horizontalVelocity * prediction;
+                targetPosition += targetVelocity * prediction;
             }
+            return targetPosition;
         }
     }
 }

@@ -57,10 +57,11 @@ namespace GameBrains.Steering
 
 	public class FleeSteeringBehaviour : SeekSteeringBehaviour
 	{
-		protected override void DetermineDesiredDirection()
+		protected override Vector3 DetermineDesiredDirection()
 		{
-			base.DetermineDesiredDirection();
+			desiredMoveDirection  = base.DetermineDesiredDirection();
 			desiredMoveDirection *= -1;
+            return desiredMoveDirection;
 		}
 	}
 }
