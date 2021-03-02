@@ -58,18 +58,12 @@ namespace GameBrains.Steering
 
     public class SeekSteeringBehaviour : SteeringBehaviour
     {
+        protected const float MAX_VELOCITY=1f;
         protected override void DetermineDesiredDirection()
         {
             if (motor != null && motor.isAiControlled)
             {
                 GetTargetPosition();
-
-                // vector from current to target position.
-                desiredMoveDirection = targetPosition - transform.position;
-                desiredMoveDirection.y = 0;
-
-                // Get the length of the direction vector which is the distance to the target.
-                distanceToTarget = desiredMoveDirection.magnitude;
 
                 // if not there yet ...
                 if (distanceToTarget > satisfactionRadius)
@@ -78,7 +72,7 @@ namespace GameBrains.Steering
                     desiredMoveDirection /= distanceToTarget;
 
                     // Multiply the normalized direction vector by the distance capped at 1.
-                    desiredMoveDirection *= Mathf.Min(1, distanceToTarget);
+                    desiredMoveDirection *= Mathf.Min(MAX_VELOCITY, distanceToTarget);
                 }
                 else
                 {
@@ -97,6 +91,12 @@ namespace GameBrains.Steering
             {
                 targetPosition = targetObject.transform.position;
             }
+            // vector from current to target position.
+            desiredMoveDirection = targetPosition - transform.position;
+            desiredMoveDirection.y = 0;
+
+            // Get the length of the direction vector which is the distance to the target.
+            distanceToTarget = desiredMoveDirection.magnitude;
         }
     }
 }
