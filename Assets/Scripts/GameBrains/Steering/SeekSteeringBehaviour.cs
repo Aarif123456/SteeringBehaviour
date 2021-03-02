@@ -56,9 +56,6 @@ namespace GameBrains.Steering
 {
     [AddComponentMenu("Scripts/Steering/Seek")]
 
-    // Require a motor to be attached to the parent game object.
-    [RequireComponent(typeof(Motor))]
-
     public class SeekSteeringBehaviour : SteeringBehaviour
     {
         protected override void DetermineDesiredDirection()

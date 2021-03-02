@@ -811,7 +811,7 @@ MonoBehaviour:
   desiredMoveDirection: {x: 0, y: 0, z: 0}
   jumpDesired: 0
   isAiControlled: 1
-  currentMotorType: 2
+  currentMotorType: 5
   useFixedUpdate: 1
   pushPower: 4
 --- !u!143 &75
@@ -1294,7 +1294,7 @@ MonoBehaviour:
   desiredMoveDirection: {x: 0, y: 0, z: 0}
   jumpDesired: 0
   isAiControlled: 1
-  currentMotorType: 3
+  currentMotorType: 4
   useFixedUpdate: 1
   pushPower: 4
 --- !u!143 &179477132

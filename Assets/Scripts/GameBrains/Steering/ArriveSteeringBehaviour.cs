@@ -6,9 +6,6 @@ namespace GameBrains.Steering
 {
     
     [AddComponentMenu("Scripts/Steering/Arrive")]
-   
-    // Require a motor to be attached to the parent game object.
-    [RequireComponent(typeof(Motor))]
 
     public class ArriveSteeringBehaviour : SeekSteeringBehaviour
     {
