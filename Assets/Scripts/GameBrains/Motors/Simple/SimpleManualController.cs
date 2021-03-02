@@ -10,8 +10,8 @@ namespace GameBrains.Motors.Simple
 
     public class SimpleManualController : MonoBehaviour
     {
-        public string sideAxis = "Horizontal";
-        public string forwardAxis = "Vertical";
+        private string sideAxis = "Horizontal";
+        private string forwardAxis = "Vertical";
 
         private SimpleMotor motor;
 

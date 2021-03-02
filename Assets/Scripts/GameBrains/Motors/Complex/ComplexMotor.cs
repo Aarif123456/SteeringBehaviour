@@ -222,8 +222,9 @@ namespace GameBrains.Motors.Complex
         // After all objects are initialized, Awake is called when the script
         // is being loaded. This occurs before any Start calls.
         // Use Awake instead of the constructor for initialization.
-        public void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             controller = GetComponent<CharacterController>();
 
             if (controller == null)

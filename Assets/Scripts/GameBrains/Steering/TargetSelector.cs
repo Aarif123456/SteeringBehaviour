@@ -58,11 +58,6 @@ namespace GameBrains.Steering
 {
 	[AddComponentMenu("Scripts/Steering/Target Selector")]
 
-// Require a kind of steering behavior to be attached to the parent game object.
-// Better implementation: Require a steering behavior delegate, which would multiplex/mix multiple steering behaviors
-//	depending on sensor input
-	[RequireComponent(typeof(SteeringBehaviour))]
-
 	public class TargetSelector : WindowManager
 	{
 		public GUISkin customSkin;
@@ -87,17 +82,17 @@ namespace GameBrains.Steering
 		// Use Awake instead of the constructor for initialization.
 		public void Awake()
 		{
-			steeringBehaviour = GetComponent<SteeringBehaviour>();
-			if (steeringBehaviour == null)
-			{
-				Debug.Log("No Steering behaviour");
-			}
-
 			motor = GetComponent<Motor>();
 			if (motor == null)
 			{
 				Debug.Log("No Motor");
 			}
+
+			steeringBehaviour = motor.steeringBehaviour;
+			if (steeringBehaviour == null)
+			{
+				Debug.Log("No Steering behaviour");
+			}	
 
 			GameObject mainCamera = GameObject.Find("Main Camera");
 			if (mainCamera != null)

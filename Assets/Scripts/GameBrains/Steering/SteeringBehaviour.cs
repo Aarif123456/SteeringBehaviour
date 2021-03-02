@@ -88,7 +88,6 @@ namespace GameBrains.Steering
             {
                 Debug.Log("Provide a motor.");
             }
-
             // Default no movement needed.
             targetPosition = transform.position;
         }
@@ -96,7 +95,6 @@ namespace GameBrains.Steering
         public virtual void Update()
         {
             DetermineDesiredDirection();
-
             // Apply the direction to the motor.
             motor.desiredMoveDirection = transform.rotation * desiredMoveDirection;
             //motor.jumpDesired = UnityEngine.Random.value < 0.7f;
@@ -116,5 +114,6 @@ namespace GameBrains.Steering
         {
             desiredMoveDirection = Vector3.zero;
         }
+
     }
 }

@@ -48,36 +48,135 @@
 
 #endregion Copyright © ThotLab Games 2011. Licensed under the terms of the Microsoft Reciprocal Licence (Ms-RL).
 
+using GameBrains.Steering;
 using UnityEngine;
 
 // Require a character controller to be attached to the parent game object.
 namespace GameBrains.Motors
 {
-	[RequireComponent(typeof(CharacterController))]
+    public enum MotorType{
+        None, 
+        Seek,
+        Flee,
+        Arrive,
+        Pursuit,
+        Evade,
+        Wander,
+        Interpose,
+        Hide,
+        PathFollow,
+        OffsetPursuit,
+        ObstacleAvoidance,
+        WallAvoidance,
+    }
 
-	public abstract class Motor : MonoBehaviour
-	{
-		// Set to move.
-		public Vector3 desiredMoveDirection = Vector3.zero;
+    [RequireComponent(typeof(CharacterController))]
+    public abstract class Motor : MonoBehaviour
+    {
+        // Set to move.
+        public Vector3 desiredMoveDirection = Vector3.zero;
 
-		// Set true to initiate or sustain a jump.
-		public bool jumpDesired = false;
-	
-		public bool isAiControlled = true;
-	
-		private float desiredSpeedFactor = 1;
-	
-		public float DesiredSpeedFactor
-		{
-			get
-			{
-				return desiredSpeedFactor;
-			}
-		
-			set
-			{
-				desiredSpeedFactor = Mathf.Clamp01(value);
-			}
-		}
-	}
+        // Set true to initiate or sustain a jump.
+        public bool jumpDesired = false;
+    
+        public bool isAiControlled = true;
+        
+        public MotorType currentMotorType = MotorType.None;
+        public SteeringBehaviour steeringBehaviour{
+            get {
+                return gameObject.GetComponent<SteeringBehaviour>();
+            }
+        }
+        private float desiredSpeedFactor = 1;
+    
+        protected virtual void Awake(){
+            AddSteeringScript();
+        }
+
+        /* Motor can handle adding script */
+        public void AddSteeringScript(){
+            switch (currentMotorType){
+                case MotorType.None:
+                    Debug.LogWarning("No selected motor type");
+                    break;
+                case MotorType.Seek:
+                    if(gameObject.GetComponent<SeekSteeringBehaviour>() == null){
+                        gameObject.AddComponent<SeekSteeringBehaviour>();
+                    }
+                    break;
+                case MotorType.Flee:
+                    if(gameObject.GetComponent<FleeSteeringBehaviour>() == null){
+                        gameObject.AddComponent<FleeSteeringBehaviour>();
+                    }
+                    break;
+                case MotorType.Arrive:
+                    if(gameObject.GetComponent<ArriveSteeringBehaviour>() == null){
+                        gameObject.AddComponent<ArriveSteeringBehaviour>();
+                    }
+                    break;
+                /*case MotorType.Pursuit:
+                    if(gameObject.GetComponent<PersuitSteeringBehaviour>() == null){
+                        gameObject.AddComponent<PersuitSteeringBehaviour>();
+                    }
+                    break;
+                case MotorType.Evade:
+                    if(gameObject.GetComponent<EvadeSteeringBehaviour>() == null){
+                        gameObject.AddComponent<EvadeSteeringBehaviour>();
+                    }
+                    break;
+                case MotorType.Wander:
+                    if(gameObject.GetComponent<WanderSteeringBehaviour>() == null){
+                        gameObject.AddComponent<WanderSteeringBehaviour>();
+                    }
+                    break;
+                case MotorType.Interpose:
+                    if(gameObject.GetComponent<InterposeSteeringBehaviour>() == null){
+                        gameObject.AddComponent<InterposeSteeringBehaviour>();
+                    }
+                    break;
+                case MotorType.Hide:
+                    if(gameObject.GetComponent<HideSteeringBehaviour>() == null){
+                        gameObject.AddComponent<HideSteeringBehaviour>();
+                    }
+                    break;
+                case MotorType.PathFollow:
+                    if(gameObject.GetComponent<PathFollowSteeringBehaviour>() == null){
+                        gameObject.AddComponent<PathFollowSteeringBehaviour>();
+                    }
+                    break;
+                case MotorType.OffsetPursuit:
+                    if(gameObject.GetComponent<OffsetPursuitSteeringBehaviour>() == null){
+                        gameObject.AddComponent<OffsetPursuitSteeringBehaviour>();
+                    }
+                case MotorType.ObstacleAvoidance:
+                    if(gameObject.GetComponent<ObstacleAvoidanceSteeringBehaviour>() == null){
+                        gameObject.AddComponent<ObstacleAvoidanceSteeringBehaviour>();
+                    } 
+                    gameObject.AddComponent<>();
+                    break;
+                case MotorType.WallAvoidance:
+                    if(gameObject.GetComponent<WallAvoidanceSteeringBehaviour>() == null){
+                        gameObject.AddComponent<WallAvoidanceSteeringBehaviour>();
+                    } 
+                    gameObject.AddComponent<>();
+                    break;    */
+                default:
+                    Debug.LogWarning("Unimplemented behavior");
+                    break;
+            }
+        }
+
+        public float DesiredSpeedFactor
+        {
+            get
+            {
+                return desiredSpeedFactor;
+            }
+        
+            set
+            {
+                desiredSpeedFactor = Mathf.Clamp01(value);
+            }
+        }
+    }
 }
