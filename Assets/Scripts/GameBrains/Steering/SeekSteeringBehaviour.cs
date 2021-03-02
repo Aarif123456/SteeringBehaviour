@@ -65,10 +65,7 @@ namespace GameBrains.Steering
         {
             if (motor != null && motor.isAiControlled)
             {
-                if (targetObject != null)
-                {
-                    targetPosition = targetObject.transform.position;
-                }
+                GetTargetPosition();
 
                 // vector from current to target position.
                 desiredMoveDirection = targetPosition - transform.position;
@@ -95,6 +92,13 @@ namespace GameBrains.Steering
             else
             {
                 desiredMoveDirection = Vector3.zero;
+            }
+        }
+
+        protected virtual void GetTargetPosition(){
+            if (targetObject != null)
+            {
+                targetPosition = targetObject.transform.position;
             }
         }
     }

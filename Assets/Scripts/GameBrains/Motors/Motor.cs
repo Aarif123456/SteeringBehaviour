@@ -114,11 +114,12 @@ namespace GameBrains.Motors
                         gameObject.AddComponent<ArriveSteeringBehaviour>();
                     }
                     break;
-                /*case MotorType.Pursuit:
-                    if(gameObject.GetComponent<PersuitSteeringBehaviour>() == null){
-                        gameObject.AddComponent<PersuitSteeringBehaviour>();
+                case MotorType.Pursuit:
+                    if(gameObject.GetComponent<PursuitSteeringBehaviour>() == null){
+                        gameObject.AddComponent<PursuitSteeringBehaviour>();
                     }
                     break;
+                /*
                 case MotorType.Evade:
                     if(gameObject.GetComponent<EvadeSteeringBehaviour>() == null){
                         gameObject.AddComponent<EvadeSteeringBehaviour>();
