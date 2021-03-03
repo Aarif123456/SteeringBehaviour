@@ -125,12 +125,12 @@ namespace GameBrains.Motors
                         gameObject.AddComponent<EvadeSteeringBehaviour>();
                     }
                     break;
-                /*
                 case MotorType.Wander:
                     if(gameObject.GetComponent<WanderSteeringBehaviour>() == null){
                         gameObject.AddComponent<WanderSteeringBehaviour>();
                     }
                     break;
+                /*
                 case MotorType.Interpose:
                     if(gameObject.GetComponent<InterposeSteeringBehaviour>() == null){
                         gameObject.AddComponent<InterposeSteeringBehaviour>();
