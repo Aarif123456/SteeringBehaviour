@@ -130,6 +130,11 @@ namespace GameBrains.Motors
                         gameObject.AddComponent<WanderSteeringBehaviour>();
                     }
                     break;
+                case MotorType.OffsetPursuit:
+                    if(gameObject.GetComponent<OffsetPursuitSteeringBehaviour>() == null){
+                        gameObject.AddComponent<OffsetPursuitSteeringBehaviour>();
+                    }
+                    break;
                 /*
                 case MotorType.Interpose:
                     if(gameObject.GetComponent<InterposeSteeringBehaviour>() == null){
@@ -146,10 +151,6 @@ namespace GameBrains.Motors
                         gameObject.AddComponent<PathFollowSteeringBehaviour>();
                     }
                     break;
-                case MotorType.OffsetPursuit:
-                    if(gameObject.GetComponent<OffsetPursuitSteeringBehaviour>() == null){
-                        gameObject.AddComponent<OffsetPursuitSteeringBehaviour>();
-                    }
                 case MotorType.ObstacleAvoidance:
                     if(gameObject.GetComponent<ObstacleAvoidanceSteeringBehaviour>() == null){
                         gameObject.AddComponent<ObstacleAvoidanceSteeringBehaviour>();

@@ -10,12 +10,11 @@ Implemented
 - Arrival
 - Pursuit
 - Evade
-
-Created
 - Wander
+- Offset pursuit
+Created
 - Interpose
 - Hide
 - Path follow 
-- Offset pursuit
 - Obstacle avoidance
 - Wall avoidance
